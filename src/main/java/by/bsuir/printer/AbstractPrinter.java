@@ -1,6 +1,7 @@
 package by.bsuir.printer;
 
 import by.bsuir.util.DateHandler;
+import by.bsuir.util.FileManager;
 
 import java.io.File;
 import java.util.Date;
@@ -11,12 +12,7 @@ public abstract class AbstractPrinter implements Printer {
 
     @Override
     public File getFolder() {
-        String absLocation = new File("src").getAbsolutePath();
-        File folder = new File(absLocation + DEFAULT_FOLDER_LOCATION);
-        if (!folder.exists()) {
-            folder.mkdir();
-        }
-        return folder;
+        return FileManager.getProjectFolder(DEFAULT_FOLDER_LOCATION);
     }
 
     @Override

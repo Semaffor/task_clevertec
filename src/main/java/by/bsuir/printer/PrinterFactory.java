@@ -1,7 +1,5 @@
 package by.bsuir.printer;
 
-import by.bsuir.util.DateHandler;
-
 public class PrinterFactory {
 
     public static Printer getReceiptPrinter(PrinterType type) {

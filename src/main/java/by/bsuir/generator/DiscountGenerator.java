@@ -1,10 +1,7 @@
 package by.bsuir.generator;
 
 import by.bsuir.entity.Discount;
-import by.bsuir.entity.Product;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class DiscountGenerator {

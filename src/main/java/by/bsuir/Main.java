@@ -3,6 +3,8 @@ package by.bsuir;
 import by.bsuir.entity.Receipt;
 import by.bsuir.generator.DiscountGenerator;
 import by.bsuir.generator.ProductGenerator;
+import by.bsuir.reader.BasicReader;
+import by.bsuir.reader.TextReader;
 import by.bsuir.service.*;
 import by.bsuir.service.impl.CardServiceImpl;
 import by.bsuir.service.impl.MenuServiceImpl;
@@ -23,13 +25,16 @@ public class Main {
 
 //    static String[] argGlob = {"1-2", "1-4", "card-1234"};
     static String[] argGlob = {"1-2", "3-4", "5-6", "3-1", "2-1", "card-1234"};
+    public static final String FILE_WITH_CARDS_NAME = "discountCard.txt";
 
     public static void main(String[] args) {
 
         Random random = new Random();
         MenuService menuService = new MenuServiceImpl(new ProductGenerator(random, new DiscountGenerator(random)));
         OrderService orderService = new OrderServiceImpl();
-        CardService cardService = new CardServiceImpl();
+
+        DiscountParser discountParser = new DiscountParser(new TextReader(new BasicReader(FILE_WITH_CARDS_NAME)));
+        CardService cardService = new CardServiceImpl(discountParser.parseFromFile());
 
         ArgsParser argsParser = new ArgsParser(menuService, cardService, orderService);
 

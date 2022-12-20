@@ -1,8 +1,5 @@
 package by.bsuir.entity;
 
-import by.bsuir.entity.BaseEntity;
-import by.bsuir.entity.Product;
-
 import java.util.Objects;
 
 public class Order extends BaseEntity {

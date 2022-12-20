@@ -21,6 +21,6 @@ public class MenuServiceImpl implements MenuService {
        return menu.stream()
                 .filter(product -> Objects.equals(product.getId(), id))
                 .findFirst()
-                .orElseThrow(() -> new NotFoundException(String.format("Товар с id=%s не найден", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Product with id=%s hasn't found", id)));
     }
 }
