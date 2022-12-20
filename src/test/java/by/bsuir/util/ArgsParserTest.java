@@ -15,6 +15,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -45,7 +47,7 @@ class ArgsParserTest {
 
     @Test
     void testParseArgsWhenCorrectShouldPass() {
-        String[] testArgs = {"1-2", "3-4", "5-6", "3-1", "2-1"};
+        List<String> testArgs = List.of("1-2", "3-4", "5-6", "3-1", "2-1");
         doNothing().when(orderService).addNewOrder(any());
         when(orderService.getOrders()).thenReturn(null);
         Receipt result = argsParser.parseReceipt(testArgs);

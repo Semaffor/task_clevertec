@@ -12,7 +12,7 @@ public class PrinterTxt extends AbstractPrinter {
 
         try (FileWriter fileWriter = new FileWriter(fileToWrite)) {
             fileWriter.write(data);
-            System.out.println("Чек распечатан");
+            System.out.println("Receipt has been printed in folder receipts");
         }
     }
 }

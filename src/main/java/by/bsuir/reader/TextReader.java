@@ -8,7 +8,7 @@ public class TextReader extends ReaderDecorator {
 
     @Override
     public String readFile() {
-        System.out.println("Decorating reading");
+//        System.out.println("Decorating reading");
         return reader.readFile();
     }
 }

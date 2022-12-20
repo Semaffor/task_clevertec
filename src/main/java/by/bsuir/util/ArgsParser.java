@@ -8,6 +8,7 @@ import by.bsuir.service.MenuService;
 import by.bsuir.service.OrderService;
 
 import java.util.Date;
+import java.util.List;
 
 public class ArgsParser {
 
@@ -24,7 +25,7 @@ public class ArgsParser {
         this.orderService = orderService;
     }
 
-    public Receipt parseReceipt(String... args) {
+    public Receipt parseReceipt(List<String> args) {
         DiscountCard discountCard = null;
         for (String arg : args) {
             if (!arg.contains("card")) {
