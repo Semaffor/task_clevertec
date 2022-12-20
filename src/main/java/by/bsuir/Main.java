@@ -19,11 +19,13 @@ public class Main {
     //better to set into properties
     public static final Locale locale= new Locale("ru", "RU");
 
+//    static String[] argGlob = {"1-2", "1-4", "card-1234"};
     static String[] argGlob = {"1-2", "3-4", "5-6", "3-1", "2-1", "card-1234"};
 
     public static void main(String[] args) {
 
-        MenuService menuService = new MenuServiceImpl(new ProductGenerator(new Random()));
+        Random random = new Random();
+        MenuService menuService = new MenuServiceImpl(new ProductGenerator(random, new DiscountGenerator(random)));
         ReceiptService receiptService = new ReceiptServiceImpl();
         OrderServiceImpl orderService = new OrderServiceImpl();
 
@@ -34,7 +36,7 @@ public class Main {
         ReceiptTextTranslator textTranslator = new ReceiptTextTranslator(
                 new DateHandler(locale),
                 new ReceiptCalculator());
-        String receiptString = textTranslator.convertToText(receipt);
+        String receiptString = textTranslator.convertInText(receipt);
 
         try {
             Printer printer = PrinterFactory.getReceiptPrinter(PrinterType.TXT);

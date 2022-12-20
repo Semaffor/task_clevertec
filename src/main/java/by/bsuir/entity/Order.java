@@ -8,21 +8,16 @@ import java.util.Objects;
 public class Order extends BaseEntity {
     private Product product;
     private int quantity;
-    private double discount;
 
     private Order() {
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public double getTotalPrice() {
+        return product.getPrice() * quantity;
     }
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
     }
 
     public Product getProduct() {
@@ -32,11 +27,6 @@ public class Order extends BaseEntity {
     public int getQuantity() {
         return quantity;
     }
-
-    public double getDiscount() {
-        return discount;
-    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -53,7 +43,6 @@ public class Order extends BaseEntity {
         return "Order{" +
                 "product=" + product +
                 ", quantity=" + quantity +
-                ", discount=" + discount +
                 '}';
     }
 
@@ -73,11 +62,6 @@ public class Order extends BaseEntity {
 
         public Builder product(Product product) {
             Order.this.product = product;
-            return this;
-        }
-
-        public Builder discount(Double discount) {
-            Order.this.discount = discount;
             return this;
         }
 

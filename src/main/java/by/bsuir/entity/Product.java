@@ -6,6 +6,7 @@ import java.util.Objects;
 public class Product extends BaseEntity {
     private String description;
     private Double price;
+    private Discount discount;
 
     private Product() {}
 
@@ -15,6 +16,10 @@ public class Product extends BaseEntity {
 
     public Double getPrice() {
         return price;
+    }
+
+    public Discount getDiscount() {
+        return discount;
     }
 
     public static Builder builder() {
@@ -38,6 +43,16 @@ public class Product extends BaseEntity {
 
         public Builder setPrice(Double price) {
             Product.this.price = price;
+            return this;
+        }
+
+        public Builder discount(Discount discount) {
+            Product.this.discount = discount;
+            return this;
+        }
+
+        public Builder defaultDiscount() {
+            Product.this.discount = Discount.createDefault();
             return this;
         }
 

@@ -5,10 +5,7 @@ import by.bsuir.util.DateHandler;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Date;
-import java.util.Objects;
 
 //TODO SIMPLIFY
 public class PrinterTxt implements Printer {

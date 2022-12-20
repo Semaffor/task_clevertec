@@ -15,9 +15,11 @@ public class ProductGenerator {
     private static Long productId = 1L;
 
     private final Random random;
+    private final DiscountGenerator discountGenerator;
 
-    public ProductGenerator(Random random) {
+    public ProductGenerator(Random random, DiscountGenerator discountGenerator) {
         this.random = random;
+        this.discountGenerator = discountGenerator;
     }
 
     public List<Product> nextProductList() {
@@ -31,6 +33,7 @@ public class ProductGenerator {
     public Product nextProduct() {
         return Product.builder()
                 .id(productId)
+                .discount(discountGenerator.nextDiscount())
                 .setDescription("Product_" + productId++)
                 .setPrice(random.nextDouble() * (MAX_PRICE_VALUE - MIN_PRICE_VALUE) + MIN_PRICE_VALUE)
                 .build();
