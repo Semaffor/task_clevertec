@@ -9,7 +9,7 @@ public class Receipt extends BaseEntity {
     private String cashierName;
     private Date date;
     private List<Order> orders;
-    private String cardName;
+    private DiscountCard card;
 
     public String getCashierName() {
         return cashierName;
@@ -35,12 +35,8 @@ public class Receipt extends BaseEntity {
         this.orders = orders;
     }
 
-    public String getCardName() {
-        return cardName;
-    }
-
-    public void setCardName(String cardName) {
-        this.cardName = cardName;
+    public DiscountCard getCard() {
+        return card;
     }
 
     @Override
@@ -61,7 +57,7 @@ public class Receipt extends BaseEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), cashierName, date, orders, cardName);
+        return Objects.hash(super.hashCode(), cashierName, date, orders);
     }
 
     @Override
@@ -70,7 +66,7 @@ public class Receipt extends BaseEntity {
                 "cashierName='" + cashierName + '\'' +
                 ", date=" + date +
                 ", orders=" + orders +
-                ", cardName='" + cardName + '\'' +
+                ", card=" + card +
                 '}';
     }
 
@@ -83,27 +79,27 @@ public class Receipt extends BaseEntity {
         private Builder() {
         }
 
-        public Receipt.Builder id(Long id) {
+        public Builder id(Long id) {
             Receipt.super.setId(id);
             return this;
         }
 
-        public Receipt.Builder orders(List<Order> orders) {
+        public Builder orders(List<Order> orders) {
             Receipt.this.orders = orders;
             return this;
         }
 
-        public Receipt.Builder cardName(String cardName) {
-            Receipt.this.cardName = cardName;
+        public Builder discountCard(DiscountCard discountCard) {
+            Receipt.this.card = discountCard;
             return this;
         }
 
-        public Receipt.Builder cashierName(String cashierName) {
+        public Builder cashierName(String cashierName) {
             Receipt.this.cashierName = cashierName;
             return this;
         }
 
-        public Receipt.Builder date(Date date) {
+        public Builder date(Date date) {
             Receipt.this.date = date;
             return this;
         }

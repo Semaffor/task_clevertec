@@ -1,12 +1,13 @@
 package by.bsuir.service.impl;
 
 import by.bsuir.entity.Order;
+import by.bsuir.service.OrderService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class OrderServiceImpl {
+public class OrderServiceImpl implements OrderService {
 
     private final List<Order> orders = new ArrayList<>();
 

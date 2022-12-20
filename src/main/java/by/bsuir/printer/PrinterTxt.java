@@ -24,6 +24,7 @@ public class PrinterTxt implements Printer {
 
         try (FileWriter fileWriter = new FileWriter(fileToWrite)) {
             fileWriter.write(data);
+            System.out.println("Чек распечатан");
         }
     }
 }

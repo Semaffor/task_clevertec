@@ -1,4 +1,4 @@
-package by.bsuir.util;
+package by.bsuir.generator;
 
 import by.bsuir.entity.Product;
 

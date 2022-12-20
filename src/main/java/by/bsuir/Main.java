@@ -1,7 +1,10 @@
 package by.bsuir;
 
 import by.bsuir.entity.Receipt;
+import by.bsuir.generator.DiscountGenerator;
+import by.bsuir.generator.ProductGenerator;
 import by.bsuir.service.*;
+import by.bsuir.service.impl.CardServiceImpl;
 import by.bsuir.service.impl.MenuServiceImpl;
 import by.bsuir.service.impl.OrderServiceImpl;
 import by.bsuir.service.impl.ReceiptServiceImpl;
@@ -26,10 +29,10 @@ public class Main {
 
         Random random = new Random();
         MenuService menuService = new MenuServiceImpl(new ProductGenerator(random, new DiscountGenerator(random)));
-        ReceiptService receiptService = new ReceiptServiceImpl();
-        OrderServiceImpl orderService = new OrderServiceImpl();
+        OrderService orderService = new OrderServiceImpl();
+        CardService cardService = new CardServiceImpl();
 
-        ArgsParser argsParser = new ArgsParser(menuService, receiptService, orderService);
+        ArgsParser argsParser = new ArgsParser(menuService, cardService, orderService);
 
         Receipt receipt = argsParser.parseArgs(argGlob);
 
@@ -41,7 +44,6 @@ public class Main {
         try {
             Printer printer = PrinterFactory.getReceiptPrinter(PrinterType.TXT);
             printer.printReceipt(receiptString);
-            System.out.println("Чек распечатан");
         } catch (IOException e) {
             System.out.println("Не удалось создать файл с чеком: " + e.getMessage());
         }

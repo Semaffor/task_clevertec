@@ -1,5 +1,6 @@
 package by.bsuir.util;
 
+import by.bsuir.entity.DiscountCard;
 import by.bsuir.entity.Order;
 import by.bsuir.entity.Product;
 import by.bsuir.entity.Receipt;
@@ -38,10 +39,12 @@ public class ReceiptTextTranslator {
                 .append(product.getDescription()).append("\t\t\t")
                 .append(String.format("$%.2f", product.getPrice())).append("\t")
                 .append(String.format("$%.2f", priceAndDiscount.totalPrice())).append("\n");
-        double discount = priceAndDiscount.getDiscount();
+        double discount = priceAndDiscount.getItemDiscountInMoney();
         if (discount > 0.0) {
-            sb.append(String.format("Скидка (%.2f%c):\t\t\t\t\t $%.2f", discount, '%',
-                    order.getProduct().getDiscount().getDiscountInPercent())).append("\n");
+            sb.append(String.format("Скидка (%.2f%c):\t\t\t\t\t $%.2f",
+                    order.getProduct().getDiscount().getDiscountInPercent(), '%',
+                    discount
+                    )).append("\n");
         }
     }
 
@@ -55,10 +58,19 @@ public class ReceiptTextTranslator {
 
     private void getReceiptFoot(Receipt receipt, StringBuilder sb) {
         sb.append(generateLine(DELIMITER_LINE_LENGTH));
+        handleCard(receipt.getCard(), sb);
         sb.append(String.format("Discount:\t\t\t\t\t\t\t$%.2f\n", calculator.getTotalDiscount(receipt)));
-        sb.append(String.format("Total:\t\t\t\t\t\t\t\t$%.2f\n", calculator.getTotalPriceWithDiscount(receipt)));
+        sb.append(String.format("Total:\t\t\t\t\t\t\t\t$%.2f\n",calculator.getTotalPriceWithDiscount(receipt)));
     }
 
+    private void handleCard(DiscountCard card, StringBuilder sb) {
+        if (card != null && card.additionalDiscountPercent() != 0.0) {
+            sb.append(String.format("Скидочная карта: %s, доп. скидка %.2f%c\n",
+                    card.cardName(),
+                    card.additionalDiscountPercent(), '%'));
+
+        }
+    }
     private String generateLine(int length) {
         return DELIMITER.repeat(Math.max(0, length)) + "\n";
     }

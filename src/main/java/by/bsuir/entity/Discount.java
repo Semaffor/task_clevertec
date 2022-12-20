@@ -18,7 +18,7 @@ public class Discount {
     }
 
     public double getDiscount() {
-        return 1 - discountInPercent / 100;
+        return discountInPercent / 100;
     }
 
     public void setDiscountInPercent(double discountInPercent) {

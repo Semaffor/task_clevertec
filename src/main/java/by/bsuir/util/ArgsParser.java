@@ -1,10 +1,11 @@
 package by.bsuir.util;
 
+import by.bsuir.entity.DiscountCard;
 import by.bsuir.entity.Order;
 import by.bsuir.entity.Receipt;
+import by.bsuir.service.CardService;
 import by.bsuir.service.MenuService;
-import by.bsuir.service.impl.OrderServiceImpl;
-import by.bsuir.service.ReceiptService;
+import by.bsuir.service.OrderService;
 
 import java.util.Date;
 
@@ -14,37 +15,38 @@ public class ArgsParser {
     private static Long productId = 1L;
 
     private final MenuService menuService;
-    private final ReceiptService receiptService;
-    private final OrderServiceImpl orderService;
+    private final CardService cardService;
+    private final OrderService orderService;
 
-    public ArgsParser(MenuService menuService, ReceiptService receiptService, OrderServiceImpl orderService) {
+    public ArgsParser(MenuService menuService, CardService cardService, OrderService orderService) {
         this.menuService = menuService;
-        this.receiptService = receiptService;
+        this.cardService = cardService;
         this.orderService = orderService;
     }
 
     public Receipt parseArgs(String... args) {
-        String cardName = null;
+        DiscountCard discountCard = null;
         for (String arg : args) {
             if (!arg.contains("card")) {
                 orderService.addNewOrder(parsePairToOrder(arg));
             } else {
-                cardName = parsePairToCardName(arg);
+                discountCard = parsePairToDiscountCard(arg);
             }
         }
 
         return Receipt.builder()
                 .cashierName("ME")
                 .orders(orderService.getOrders())
-                .cardName(cardName)
+                .discountCard(discountCard)
                 .date(new Date())
                 .build();
     }
 
 
-    public String parsePairToCardName(String arg) {
+    public DiscountCard parsePairToDiscountCard(String arg) {
         String[] splitedArg = arg.split(INSIDE_ARG_DELIMITER);
-        return splitedArg[1];
+        String cardName = splitedArg[1];
+        return cardService.findByCardName(cardName);
     }
 
     //1-2
@@ -54,8 +56,8 @@ public class ArgsParser {
         int quantity = Integer.parseInt(splitedArg[1]);
 
         return Order.builder()
-                .id(menuProductId++)
-                .product(menuService.findById(menuProductId))
+                .id(menuProductId)
+                .product(menuService.findById(menuProductId++))
                 .quantity(quantity)
                 .build();
     }

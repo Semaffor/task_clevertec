@@ -3,7 +3,7 @@ package by.bsuir.service.impl;
 import by.bsuir.entity.Product;
 import by.bsuir.exception.NotFoundException;
 import by.bsuir.service.MenuService;
-import by.bsuir.util.ProductGenerator;
+import by.bsuir.generator.ProductGenerator;
 
 import java.util.List;
 import java.util.Objects;

@@ -1,7 +1,7 @@
 package by.bsuir.model;
 
 public record PriceDiscountPair(double totalPrice, double priceWithDiscount) {
-    public double getDiscount() {
+    public double getItemDiscountInMoney() {
         return totalPrice - priceWithDiscount;
     }
 }

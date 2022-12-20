@@ -28,6 +28,10 @@ public class Order extends BaseEntity {
         return quantity;
     }
 
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @Override
     public boolean equals(Object o) {
         return super.equals(o);
