@@ -7,7 +7,6 @@ import by.bsuir.service.*;
 import by.bsuir.service.impl.CardServiceImpl;
 import by.bsuir.service.impl.MenuServiceImpl;
 import by.bsuir.service.impl.OrderServiceImpl;
-import by.bsuir.service.impl.ReceiptServiceImpl;
 import by.bsuir.util.*;
 import by.bsuir.printer.Printer;
 import by.bsuir.printer.PrinterFactory;
@@ -34,7 +33,7 @@ public class Main {
 
         ArgsParser argsParser = new ArgsParser(menuService, cardService, orderService);
 
-        Receipt receipt = argsParser.parseArgs(argGlob);
+        Receipt receipt = argsParser.parseReceipt(argGlob);
 
         ReceiptTextTranslator textTranslator = new ReceiptTextTranslator(
                 new DateHandler(locale),

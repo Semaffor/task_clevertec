@@ -34,12 +34,21 @@ public class Order extends BaseEntity {
 
     @Override
     public boolean equals(Object o) {
-        return super.equals(o);
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Order order)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+        return quantity == order.quantity && Objects.equals(product, order.product);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), product);
+        return Objects.hash(super.hashCode(), product, quantity);
     }
 
     @Override

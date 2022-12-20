@@ -40,7 +40,7 @@ public class ReceiptCalculator {
         return (1 - card.getAdditionalDiscount()) * currentPrice;
     }
 
-    private double getOrderPriceWithDiscount(Order order) {
+    public double getOrderPriceWithDiscount(Order order) {
         Discount orderDiscount = order.getProduct().getDiscount();
         if (orderDiscount == null || orderDiscount.getMinQuantity() > order.getQuantity()) {
             return order.getProduct().getPrice() * order.getQuantity();

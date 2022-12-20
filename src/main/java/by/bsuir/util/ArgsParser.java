@@ -24,7 +24,7 @@ public class ArgsParser {
         this.orderService = orderService;
     }
 
-    public Receipt parseArgs(String... args) {
+    public Receipt parseReceipt(String... args) {
         DiscountCard discountCard = null;
         for (String arg : args) {
             if (!arg.contains("card")) {
@@ -49,7 +49,6 @@ public class ArgsParser {
         return cardService.findByCardName(cardName);
     }
 
-    //1-2
     public Order parsePairToOrder(String arg) {
         String[] splitedArg = arg.split(INSIDE_ARG_DELIMITER);
         Long menuProductId = Long.parseLong(splitedArg[0]);
